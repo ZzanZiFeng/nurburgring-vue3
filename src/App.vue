@@ -2,7 +2,12 @@
   <div id="app" :class="[showAllCornerNames ? 'show-all-corners' : '', lang]">
     <div class="track-map">
       <div class="inner">
-        <svg viewBox="0 0 660 530" class="main-svg" width="6600px" height="5300px">
+        <svg
+          viewBox="0 0 660 530"
+          class="main-svg"
+          width="6600px"
+          height="5300px"
+        >
           <defs>
             <path
               d="M246.6 482.9c-.8-.8-1.6-1.7-2.4-2.8l-1.7-2.3c-3.7-5.6-2.8-7-6.9-7.3-2-.1-4.3 0-6.9 4.7a23.2 23.2 0 0 1-5 6.4c-4.2 3.8-8.7 7-14.2 7-5.8 0-7.6-3-14.4-5.2a30.4 30.4 0 0 0-15.4-.6c-2 1-1.8 1.2-3.4 1.4-2.1.2-4-1-5.6-2.6-2.4-2.6-3.4-4.4-5.7-7.4-1.7-2.3-4.5-3.6-6-6.2-1-1.8-.6-2.7-3-4.5-1.6-1.2-8.7-1.1-13.4-2.8-3.7-1.2-3.3-6.1-5.8-9.9-2.4-3.7-14.7-11-21.7-16.9-8.4-8.8-8.7-9.6-12-13.4-3.4-3.8-6.4-6.7-9-10.4a15.6 15.6 0 0 1-3.1-10.9c1-9.8 6.7-17.6 6.8-28.7 0-7.7.6-11.2-1.2-23.8-.7-5-2.4-8.5-4.3-13.3a305 305 0 0 0-15-32.4c-2.2-4-5.3-7-9-9.2-4-2.3-8.8-4.3-13.3-6.6a5.6 5.6 0 0 1-3-6c1-4.4 7.3-4.7 14.7-8.2 9-4.2 13-6.7 18.2-11.2 6.3-5.5 12-9.3 18.1-15.3 4.3-4.2 8-6.8 11.5-13.7 1.9-3.8 3.2-7 4.3-11.4 1.5-6.5.1-12.2 1.1-15.7 1.2-4.2 6-5 6.6-8 .6-3-2.8-6.3-1.2-10.6 1-2.6 7.6-6 12.3-10.2 3.9-3.3 3.3-4.2 7-8.1 7.2-7.7 7.7-6.6 15.3-15.2a24 24 0 0 0 6.4-11.5c1.2-5.9-1.5-11.2-3.6-16-.7-1.5-1.9-2.4-3.8-3.2-1.7-.6-4.3.2-6.1-.5-3-1.2-5-2.1-7.8-4.4-3.6-2.8-5.1-5.3-5.3-7.4-.2-2.7 1.4-3.7 3.4-4.6a53 53 0 0 0 15.4-10.2c2.5-2.6 1.2-5.9 2.7-9.4A23 23 0 0 1 166 77c3.3-3.2 8-4.9 13.7-2.3a57.6 57.6 0 0 1 16.4 11c1.5 1.4 1 6 4.2 5.8 4.3-.1 2.1-3 6.6-5.1 7-3.4 16.7-3.8 23.8-2 3.4.8 7.2 2.8 10.6 2.3 4.4-.7 6-4.4 6.4-6.1.9-4-.1-9.7 2-12.5 2.3-2.9 3.4-4.4 17.5-9 13.4-4.3 18.2-1.8 25-4.5 8-3 14.2-13 20.4-12.6 3.2.2 6.3 2 6.9 5.7 1 6.8-.6 13.5-.7 19.7 0 14 4 21.7 6.7 24.8 5.5 6 11.4 9.5 18 12.6 5.1 2.4 9.2 4.7 16.2 4.8 13.2.2 23.3 0 33.4 2.4a53.4 53.4 0 0 1 18.7 6.9c4.2 2.9 6.6 5.6 10.6 8.1 7.6 4.7 13 6.8 19.2 6 5-.8 11.9-5.4 17.1-9.8 4.5-3.7 8.5-9.4 14.2-10.6 8.6-1.9 12.8-.8 18.5-3.1 5-2 7.6-2.1 9-.8 3.5 3.3.9 7-1.6 8.8-5.8 4.4-15.5 12.2-18.3 13-6.8 1.6-5.5 7.3-4 8.8 3.5 3.5 8.8 1 9.5-1.6.5-1.9 2-3 4.8-5.1a48 48 0 0 1 13-6.4c2.8-1 4.6-2 11.9-2.8 5.3-.6 10.7-7.5 15-13.6 5.4-8 .3-9.3 1.5-13.8 1-3.8 2-7.7 7-11 4.1-3 26.3 4.5 28 5.5 3.9 2.4 5.8 7 9.4 8.8 4.3 2 6 2 9.5 3.6a38 38 0 0 1 10.3 15.3c.2 5-8.4 18.5-3.3 23 4.5 4 5.9 2.8 11 5.3 3.4 1.8 3.4 7.5 3.7 11.4.2 3.8 0 8.9-3 10.5-6.2 3.3-14.6-1.7-21.6.2-3.7 1-2.4 5.9-7 11.8-5.5 6.8-8 14.4-8 18.7 0 6.3.6 14.3 0 20-.2 3-2 6.5-4.7 7.8-4.5 2.3-8.8 1.9-12.5 4.6-4 2.8-6.4 6-10.1 10-3.6 4-4.3 6.4-6.5 11.3-2 4.2-3.6 6-5.9 8.7-2 2.4-5.1 3.5-7.7 5.3-2.5 1.6-4.7 4.3-8.9 5.4-11.3 3-21.9 7.8-32.7 8.6-7 .5-9.5-8.4-16.5-8.3-2.9 0-5.7 1.7-8.2 3.4-4.3 3-8.6 5.1-8.3 8.7 1 11.5 22.4 10.7 28 19.6 2 3 4.7 7 4.2 14-.2 3.9-3.3 7-6.2 9.3-6.6 5.4-29.9 18.6-45.1 27.8L351.8 402c-13.8 8.7-35.7 21.7-41.6 26.1-14.2 10.8-26.5 31-29.7 35.7-2 2.9-8.9 7.7-9.6 9.9-1 2.5-.7 7.4-3.2 9.2-3 2.1-4.7 1.3-7.8 1.3-2.7 0-2 .7-4.9 1.3-1.8.4-5 .3-8.3-2.6"
@@ -27,7 +32,10 @@
               class="bridge"
               :d="`M${w * c.stx} ${h * c.sty}L${w * c.edx} ${h * c.edy}`"
             />
-            <path class="bridge" :d="`M${w * 0.367} ${h * 0.919}L${w * 0.379} ${h * 0.903}`" />
+            <path
+              class="bridge"
+              :d="`M${w * 0.367} ${h * 0.919}L${w * 0.379} ${h * 0.903}`"
+            />
           </g>
 
           <use href="#track" class="base" />
@@ -109,8 +117,12 @@
         <div class="mid">
           <div class="msg" v-if="p == 0">
             <div class="inner">
-              <p class="title-font msg-title" v-if="lang == 'cn'">纽北赛道地图</p>
-              <p class="title-font msg-title" v-if="lang == 'en'">Nürburgring Map</p>
+              <p class="title-font msg-title" v-if="lang == 'cn'">
+                纽北赛道地图
+              </p>
+              <p class="title-font msg-title" v-if="lang == 'en'">
+                Nürburgring Map
+              </p>
               <p v-if="lang == 'cn'">
                 <a
                   href="https://zh.wikipedia.org/zh-hans/%E7%BA%BD%E5%8D%9A%E6%A0%BC%E6%9E%97%E8%B5%9B%E9%81%93"
@@ -120,16 +132,21 @@
                 年代，由于跑道非常长、地形复杂充满挑战性，被认为是世界上最严苛的竞速赛道，其中的北环俗称为"纽北"，又叫"绿色地狱"。这里很多弯道都有独特的名字和故事，通过本地图可以方便爱好者学习。
               </p>
               <p v-if="lang == 'en'">
-                <a href="https://en.wikipedia.org/wiki/N%C3%BCrburgring" target="_blank"
+                <a
+                  href="https://en.wikipedia.org/wiki/N%C3%BCrburgring"
+                  target="_blank"
                   >Nürburgring</a
                 >
-                is a German race track built in 1920s, and the North Loop(Nordschleife) of it is
-                very famous and challenging for racers around the world, through this interactive
-                map you can learn the names of the corners in Nürburgring
+                is a German race track built in 1920s, and the North
+                Loop(Nordschleife) of it is very famous and challenging for
+                racers around the world, through this interactive map you can
+                learn the names of the corners in Nürburgring
               </p>
               <div class="indicator">
                 <div v-if="lang == 'cn'">向下滚动或点击弯道名查看地图</div>
-                <div v-if="lang == 'en'">Scroll or click the corner to start</div>
+                <div v-if="lang == 'en'">
+                  Scroll or click the corner to start
+                </div>
                 <svg viewBox="0 0 100 100" class="scroll-arrow">
                   <path d="M10 20l40 30l40 -30" />
                   <path d="M10 60l40 30l40 -30" />
@@ -170,16 +187,41 @@
           </div>
           <div
             class="nickname qt skew-n title-font"
-            v-if="lang == 'cn' && currentCorner.nk && currentCorner.ch != currentCorner.nk"
+            v-if="
+              lang == 'cn' &&
+              currentCorner.nk &&
+              currentCorner.ch != currentCorner.nk
+            "
           >
             {{ currentCorner.nk }}
           </div>
           <div class="secondary skew-n" v-if="currentCorner.en">
             <span class="extra" v-if="currentCorner.de">
               <svg viewBox="0 0 5 3" class="skew-p">
-                <rect id="black_stripe" width="5" height="3" y="0" x="0" fill="#000" />
-                <rect id="red_stripe" width="5" height="2" y="1" x="0" fill="#6C6C6C" />
-                <rect id="gold_stripe" width="5" height="1" y="2" x="0" fill="#DADADA" />
+                <rect
+                  id="black_stripe"
+                  width="5"
+                  height="3"
+                  y="0"
+                  x="0"
+                  fill="#000"
+                />
+                <rect
+                  id="red_stripe"
+                  width="5"
+                  height="2"
+                  y="1"
+                  x="0"
+                  fill="#6C6C6C"
+                />
+                <rect
+                  id="gold_stripe"
+                  width="5"
+                  height="1"
+                  y="2"
+                  x="0"
+                  fill="#DADADA"
+                />
               </svg>
               {{ currentCorner.de }}
             </span>
@@ -189,19 +231,33 @@
                   <path d="M0,0 v30 h60 v-30 z" />
                 </clipPath>
                 <clipPath id="t">
-                  <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
+                  <path
+                    d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"
+                  />
                 </clipPath>
                 <g clip-path="url(#s)">
                   <path d="M0,0 v30 h60 v-30 z" fill="#292929" />
-                  <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+                  <path
+                    d="M0,0 L60,30 M60,0 L0,30"
+                    stroke="#fff"
+                    stroke-width="6"
+                  />
                   <path
                     d="M0,0 L60,30 M60,0 L0,30"
                     clip-path="url(#t)"
                     stroke="#646464"
                     stroke-width="4"
                   />
-                  <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10" />
-                  <path d="M30,0 v30 M0,15 h60" stroke="#646464" stroke-width="6" />
+                  <path
+                    d="M30,0 v30 M0,15 h60"
+                    stroke="#fff"
+                    stroke-width="10"
+                  />
+                  <path
+                    d="M30,0 v30 M0,15 h60"
+                    stroke="#646464"
+                    stroke-width="6"
+                  />
                 </g>
               </svg>
               {{ currentCorner.en }}
@@ -257,8 +313,13 @@
             cursor: pointer;
             background: white;
           "
-          @mouseover="($event.currentTarget as HTMLElement).style.transform = 'scale(1.02)'"
-          @mouseleave="($event.currentTarget as HTMLElement).style.transform = 'scale(1)'"
+          @mouseover="
+            ($event.currentTarget as HTMLElement).style.transform =
+              'scale(1.02)'
+          "
+          @mouseleave="
+            ($event.currentTarget as HTMLElement).style.transform = 'scale(1)'
+          "
         >
           <img
             class="skew-n modern-img"
@@ -276,7 +337,11 @@
           />
           <div
             class="thumb-info"
-            style="padding: 0.8em; background: white; border-radius: 0 0 8px 8px"
+            style="
+              padding: 0.8em;
+              background: white;
+              border-radius: 0 0 8px 8px;
+            "
           >
             <a
               class="thumb-source modern-source"
@@ -291,12 +356,18 @@
                 font-weight: 500;
                 transition: color 0.3s ease;
               "
-              @mouseover="$event.target.style.color = '#2980b9'"
-              @mouseleave="$event.target.style.color = '#3498db'"
+              @mouseover="
+                ($event.target as HTMLElement).style.color = '#2980b9'
+              "
+              @mouseleave="
+                ($event.target as HTMLElement).style.color = '#3498db'
+              "
             >
               <span class="skew-n">📸 {{ img.author }}</span>
             </a>
-            <div v-else style="color: #7f8c8d; font-size: 13px">📸 {{ img.author }}</div>
+            <div v-else style="color: #7f8c8d; font-size: 13px">
+              📸 {{ img.author }}
+            </div>
           </div>
         </div>
       </div>
@@ -338,20 +409,27 @@
     <!-- 控制按钮 -->
     <div class="controls">
       <button @click="toggleLang" class="control-btn">
-        {{ lang === 'cn' ? 'EN' : '中文' }}
+        {{ lang === "cn" ? "EN" : "中文" }}
       </button>
       <button @click="toggleAllCornerNames" class="control-btn">
-        {{ showAllCornerNames ? '隐藏所有' : '显示所有' }}
+        {{ showAllCornerNames ? "隐藏所有" : "显示所有" }}
       </button>
     </div>
 
     <!-- 图片模态框 -->
-    <div class="modal image" :class="showModal ? 'show' : ''" @click="closeModal" v-if="modalImage">
+    <div
+      class="modal image"
+      :class="showModal ? 'show' : ''"
+      @click="closeModal"
+      v-if="modalImage"
+    >
       <div class="inner" @click.stop>
         <div class="modal-content skew-n">
           <img :src="modalImage.src" :alt="modalImage.author" />
           <div class="source-in-modal" v-if="modalImage.url">
-            <a :href="modalImage.url" target="_blank">{{ modalImage.author }}</a>
+            <a :href="modalImage.url" target="_blank">{{
+              modalImage.author
+            }}</a>
           </div>
         </div>
         <div class="modal-close skew-n" @click="closeModal">
@@ -366,209 +444,218 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useTrackData } from './composables/useTrackData'
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useTrackData } from "./composables/useTrackData";
 
 // 响应式数据
-const p = ref(0)
-const w = ref(660)
-const h = ref(530)
-const lang = ref('cn')
-const showAllCornerNames = ref(false)
-const showCorner = ref(false)
-const showSection = ref(false)
-const cornerStart = ref(0)
-const cornerEnd = ref(0)
-const sectionStart = ref(0)
-const sectionEnd = ref(0)
-const scrollDistance = ref(0)
-const showModal = ref(false)
-const modalImage = ref<{ src: string; url: string; author: string } | null>(null)
+const p = ref(0);
+const w = ref(660);
+const h = ref(530);
+const lang = ref("cn");
+const showAllCornerNames = ref(false);
+const showCorner = ref(false);
+const showSection = ref(false);
+const cornerStart = ref(0);
+const cornerEnd = ref(0);
+const sectionStart = ref(0);
+const sectionEnd = ref(0);
+const scrollDistance = ref(0);
+const showModal = ref(false);
+const modalImage = ref<{ src: string; url: string; author: string } | null>(
+  null
+);
 
 // 获取赛道数据
-const { bridges, sections, corners } = useTrackData()
+const { bridges, sections, corners } = useTrackData();
 
 // 计算当前弯道
 const currentCorner = computed(() => {
-  if (p.value === 0) return null
+  if (p.value === 0) return null;
 
   // 查找当前位置对应的弯道
   for (const corner of corners) {
     if (corner.st <= p.value && p.value <= corner.ed) {
-      return corner
+      return corner;
     }
   }
 
   // 查找最近经过的弯道
-  const passedCorners = corners.filter((corner) => corner.ed < p.value)
-  const data = passedCorners[passedCorners.length - 1] || null
+  const passedCorners = corners.filter((corner) => corner.ed < p.value);
+  const data = passedCorners[passedCorners.length - 1] || null;
 
-  return data
-})
+  return data;
+});
 
 // 方法
 const setP = (value: number) => {
-  p.value = value
-  updateCornerSection()
+  p.value = value;
+  updateCornerSection();
 
   // 计算对应的滚动位置并滚动到那里
-  const targetScrollPercentage = value * 0.9 + 0.05
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight
-  const targetScrollTop = targetScrollPercentage * docHeight
+  const targetScrollPercentage = value * 0.98 + 0.01;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const targetScrollTop = targetScrollPercentage * docHeight;
 
   // 平滑滚动到目标位置
   window.scrollTo({
     top: targetScrollTop,
-    behavior: 'smooth',
-  })
-}
+    behavior: "smooth",
+  });
+};
 
 const toggleLang = () => {
-  lang.value = lang.value === 'cn' ? 'en' : 'cn'
-}
+  lang.value = lang.value === "cn" ? "en" : "cn";
+};
 
 const toggleAllCornerNames = () => {
-  showAllCornerNames.value = !showAllCornerNames.value
-}
+  showAllCornerNames.value = !showAllCornerNames.value;
+};
 
-const openModal = (img: { src: string; url: string; author: string }) => {
+const openModal = (img: { src: string; url?: string; author?: string }) => {
   modalImage.value = {
-    ...img,
     src: `https://s.anyway.red/nurburgring/${img.src}!/fh/300/quality/68/progressive/true/ignore-error/true`,
-  }
-  showModal.value = true
-}
+    url: img.url || "",
+    author: img.author || "",
+  };
+  showModal.value = true;
+};
 
 const closeModal = () => {
-  showModal.value = false
-  modalImage.value = null
-}
+  showModal.value = false;
+  modalImage.value = null;
+};
 
 const updateCornerSection = () => {
-  const corner = currentCorner.value
+  const corner = currentCorner.value;
   if (corner) {
-    showCorner.value = true
-    cornerStart.value = corner.st
-    cornerEnd.value = corner.ed
+    showCorner.value = true;
+    cornerStart.value = corner.st;
+    cornerEnd.value = corner.ed;
   } else {
-    showCorner.value = false
+    showCorner.value = false;
   }
 
   // 查找当前位置对应的路段
-  const currentSection = sections.find((section) => section.st <= p.value && p.value <= section.ed)
+  const currentSection = sections.find(
+    (section) => section.st <= p.value && p.value <= section.ed
+  );
 
   if (currentSection) {
-    showSection.value = true
-    sectionStart.value = currentSection.st
-    sectionEnd.value = currentSection.ed
+    showSection.value = true;
+    sectionStart.value = currentSection.st;
+    sectionEnd.value = currentSection.ed;
   } else {
-    showSection.value = false
+    showSection.value = false;
   }
-}
+};
 
 // 节流函数
 const throttle = (func: () => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout> | null = null
-  let lastExecTime = 0
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  let lastExecTime = 0;
   return function () {
-    const currentTime = Date.now()
+    const currentTime = Date.now();
 
     if (currentTime - lastExecTime > delay) {
-      func()
-      lastExecTime = currentTime
+      func();
+      lastExecTime = currentTime;
     } else {
-      if (timeoutId) clearTimeout(timeoutId)
+      if (timeoutId) clearTimeout(timeoutId);
       timeoutId = setTimeout(
         () => {
-          func()
-          lastExecTime = Date.now()
+          func();
+          lastExecTime = Date.now();
         },
-        delay - (currentTime - lastExecTime),
-      )
+        delay - (currentTime - lastExecTime)
+      );
     }
-  }
-}
+  };
+};
 
 const updateProgress = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight
-  const scrollPercentage = scrollTop / docHeight
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercentage = scrollTop / docHeight;
 
-  scrollDistance.value = scrollTop
+  scrollDistance.value = scrollTop;
 
   // 控制scrolled类 - 与原项目保持一致
   if (scrollTop > 2) {
-    document.body.classList.add('scrolled')
+    document.body.classList.add("scrolled");
   } else {
-    document.body.classList.remove('scrolled')
+    document.body.classList.remove("scrolled");
   }
 
   // 根据滚动位置更新进度 - 让整个滚动距离都用来展示赛道进度
-  const newP = scrollPercentage > 0.05 ? Math.min(1, (scrollPercentage - 0.05) / 0.9) : 0
+  // 移除死区，让整个滚动范围都响应，但保留一个小的缓冲区
+  const newP = Math.max(0, Math.min(1, (scrollPercentage - 0.01) / 0.98));
 
   // 只在值发生变化时更新
   if (Math.abs(newP - p.value) > 0.001) {
-    p.value = newP
+    p.value = newP;
 
     // 使用requestAnimationFrame优化CSS变量更新
     requestAnimationFrame(() => {
-      document.documentElement.style.setProperty('--p', p.value.toString())
-    })
+      document.documentElement.style.setProperty("--p", p.value.toString());
+    });
 
-    updateCornerSection()
+    updateCornerSection();
   }
-}
+};
 
 // 使用节流优化滚动事件
-const handleScroll = throttle(updateProgress, 16) // 约60FPS
+const handleScroll = throttle(updateProgress, 16); // 约60FPS
 
 const updatePageHeight = () => {
   // 增加页面高度，让用户有更长的滚动距离来体验赛道
   // 相当于20.832公里的赛道需要更多的滚动距离来慢慢体验
-  document.body.style.height = '9000vh'
-}
+  document.body.style.height = "9000vh";
+};
 
 // 生命周期
 onMounted(() => {
   // 设置页面高度以支持滚动
-  updatePageHeight()
+  updatePageHeight();
 
   // 初始化CSS变量
-  document.documentElement.style.setProperty('--p', '0')
+  document.documentElement.style.setProperty("--p", "0");
 
   // 监听滚动事件，使用passive选项优化性能
-  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener("scroll", handleScroll, { passive: true });
 
   // 检测用户的语言偏好
-  const userLang = navigator.language || 'en'
-  if (userLang.startsWith('zh')) {
-    lang.value = 'cn'
+  const userLang = navigator.language || "en";
+  if (userLang.startsWith("zh")) {
+    lang.value = "cn";
   }
 
   // 初始调用一次滚动处理
-  handleScroll()
+  handleScroll();
 
   // 立即检查是否需要添加scrolled类
-  const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop
+  const currentScrollTop =
+    window.pageYOffset || document.documentElement.scrollTop;
   if (currentScrollTop > 2) {
-    document.body.classList.add('scrolled')
+    document.body.classList.add("scrolled");
   }
-})
+});
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener("scroll", handleScroll);
   // 清理CSS变量
-  document.documentElement.style.removeProperty('--p')
+  document.documentElement.style.removeProperty("--p");
   // 重置页面高度
-  document.body.style.height = 'auto'
+  document.body.style.height = "auto";
   // 清理scrolled类
-  document.body.classList.remove('scrolled')
-})
+  document.body.classList.remove("scrolled");
+});
 </script>
 
 <style>
-@import url('./assets/main.css');
-
+@import url("./assets/main.css");
+.root {
+  scroll-behavior: smooth;
+}
 .controls {
   position: fixed;
   top: 20px;
