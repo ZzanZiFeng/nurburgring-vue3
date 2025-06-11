@@ -51,48 +51,6 @@
           <use href="#track" class="progress" />
         </svg>
 
-        <!-- <div
-          v-for="c in bridges"
-          :key="c.en"
-          class="corner-name bridge-name"
-          :class="[
-            c.pt < p || showAllCornerNames ? 'show' : 'hidden',
-            c.h,
-            c.v,
-            c.pt - 0.001 < p && p < c.pt + 0.001 ? 'highlighted' : '',
-          ]"
-          :style="`--x:${c.x};--y:${c.y}`"
-          @click="setP(c.pt)"
-        >
-          <div>
-            <div>
-              <template v-if="lang == 'cn'">{{ c.ch }}</template>
-              <template v-if="lang == 'en'">{{ c.en }}</template>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div
-          v-for="c in sections"
-          :key="c.en"
-          class="corner-name section-name"
-          :class="[
-            c.st < p || showAllCornerNames ? 'show' : 'hidden',
-            c.h,
-            c.v,
-            c.st < p && p < c.ed ? 'highlighted' : '',
-          ]"
-          :style="`--x:${c.x};--y:${c.y}`"
-          @click="setP((c.st + c.ed) / 2)"
-        >
-          <div>
-            <div>
-              <template v-if="lang == 'cn'">{{ c.ch }}</template>
-              <template v-if="lang == 'en'">{{ c.en }}</template>
-            </div>
-          </div>
-        </div> -->
-
         <div
           v-for="c in corners"
           :key="c.en"
@@ -265,21 +223,9 @@
           </div>
           <!-- 弯道详细信息 -->
           <div
-            class="more skew-n"
+            class="more more-info skew-n"
             v-if="currentCorner && currentCorner.more && lang == 'cn'"
             v-html="currentCorner.more"
-            style="
-              margin-top: 1.5em;
-              padding: 1.5em;
-
-              border-radius: 12px;
-              color: #2c3e50;
-              line-height: 1.8;
-              font-size: 15px;
-
-              position: relative;
-              transition: all 0.3s ease;
-            "
           ></div>
         </div>
       </div>
@@ -288,31 +234,12 @@
       <div
         class="thumbs modern-gallery"
         v-if="currentCorner && currentCorner.imgs"
-        style="
-          margin-top: 1.5em;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1em;
-          padding: 1em;
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 12px;
-          backdrop-filter: blur(8px);
-        "
       >
         <div
           class="thumb modern-thumb"
           v-for="img in currentCorner.imgs"
           :key="img.src"
           :class="img.url ? 'has-author' : ''"
-          style="
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: white;
-          "
           @mouseover="
             ($event.currentTarget as HTMLElement).style.transform =
               'scale(1.02)'
@@ -327,35 +254,14 @@
             loading="lazy"
             @click="openModal(img)"
             alt="Corner image"
-            style="
-              width: 100%;
-              height: 150px;
-              object-fit: cover;
-              border-radius: 8px 8px 0 0;
-              transition: all 0.3s ease;
-            "
           />
-          <div
-            class="thumb-info"
-            style="
-              padding: 0.8em;
-              background: white;
-              border-radius: 0 0 8px 8px;
-            "
-          >
+          <div class="thumb-info">
             <a
               class="thumb-source modern-source"
               v-if="img.url"
               :href="img.url"
               target="_blank"
               :title="`查看照片来源: ${img.author}`"
-              style="
-                color: #3498db;
-                text-decoration: none;
-                font-size: 13px;
-                font-weight: 500;
-                transition: color 0.3s ease;
-              "
               @mouseover="
                 ($event.target as HTMLElement).style.color = '#2980b9'
               "
@@ -365,46 +271,11 @@
             >
               <span class="skew-n">📸 {{ img.author }}</span>
             </a>
-            <div v-else style="color: #7f8c8d; font-size: 13px">
-              📸 {{ img.author }}
-            </div>
+            <div v-else class="thumb-author">📸 {{ img.author }}</div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- 快速测试按钮 -->
-    <!-- <div style="position: fixed; top: 200px; left: 20px; z-index: 1000">
-      <button
-        @click="setP(0.01)"
-        style="
-          margin: 2px;
-          padding: 5px;
-          background: #007acc;
-          color: white;
-          border: none;
-          border-radius: 3px;
-        "
-      >
-        测试萨宾娜 (p=0.01)
-      </button>
-      <button
-        @click="setP(0.41)"
-        style="
-          margin: 2px;
-          padding: 5px;
-          background: #007acc;
-          color: white;
-          border: none;
-          border-radius: 3px;
-        "
-      >
-        测试劳达 (p=0.41)
-      </button>
-    </div> -->
-
-    <!-- 进度指示器 (暂时隐藏) -->
-    <!-- <div class="progress-indicator" v-if="p > 0">进度: {{ (p * 100).toFixed(1) }}%</div> -->
 
     <!-- 控制按钮 -->
     <div class="controls">
@@ -444,47 +315,116 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useTrackData } from "./composables/useTrackData";
 
-// 响应式数据
-const p = ref(0);
-const w = ref(660);
-const h = ref(530);
+// 基础响应式数据 - 只保留必要的
 const lang = ref("cn");
 const showAllCornerNames = ref(false);
+const showModal = ref(false);
+const modalImage = ref<{ src: string; url: string; author: string } | null>(
+  null
+);
+
+// 用于模板绑定的响应式数据 - 但我们会直接操作内部值
+const p = ref(0);
 const showCorner = ref(false);
 const showSection = ref(false);
 const cornerStart = ref(0);
 const cornerEnd = ref(0);
 const sectionStart = ref(0);
 const sectionEnd = ref(0);
-const scrollDistance = ref(0);
-const showModal = ref(false);
-const modalImage = ref<{ src: string; url: string; author: string } | null>(
-  null
-);
+const currentCorner = ref<(typeof corners)[0] | null>(null);
+
+// 常量数据
+const w = 660;
+const h = 530;
 
 // 获取赛道数据
 const { bridges, sections, corners } = useTrackData();
 
-// 计算当前弯道
-const currentCorner = computed(() => {
-  if (p.value === 0) return null;
+// 缓存DOM元素
+let body: HTMLElement;
+
+// 直接查找当前弯道 - 避免computed的开销
+const findCurrentCorner = (progress: number) => {
+  if (progress === 0) return null;
 
   // 查找当前位置对应的弯道
   for (const corner of corners) {
-    if (corner.st <= p.value && p.value <= corner.ed) {
+    if (corner.st <= progress && progress <= corner.ed) {
       return corner;
     }
   }
 
   // 查找最近经过的弯道
-  const passedCorners = corners.filter((corner) => corner.ed < p.value);
-  const data = passedCorners[passedCorners.length - 1] || null;
+  const passedCorners = corners.filter((corner) => corner.ed < progress);
+  return passedCorners[passedCorners.length - 1] || null;
+};
 
-  return data;
-});
+// 直接更新弯道和路段状态
+const updateCornerSection = () => {
+  const corner = findCurrentCorner(p.value);
+
+  if (corner) {
+    showCorner.value = true;
+    cornerStart.value = corner.st;
+    cornerEnd.value = corner.ed;
+    currentCorner.value = corner;
+  } else {
+    showCorner.value = false;
+    currentCorner.value = null;
+  }
+
+  // 查找当前位置对应的路段
+  const currentSection = sections.find(
+    (section) => section.st <= p.value && section.ed <= p.value
+  );
+
+  if (currentSection) {
+    showSection.value = true;
+    sectionStart.value = currentSection.st;
+    sectionEnd.value = currentSection.ed;
+  } else {
+    showSection.value = false;
+  }
+};
+
+// 优化的进度更新函数 - 直接操作DOM，减少Vue响应式开销
+const updateProgress = () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercentage = scrollTop / docHeight;
+
+  // 控制scrolled类
+  if (scrollTop > 2) {
+    body.classList.add("scrolled");
+  } else {
+    body.classList.remove("scrolled");
+  }
+
+  // 计算新的进度值
+  const newP = Math.max(0, Math.min(1, (scrollPercentage - 0.01) / 0.98));
+
+  // 只在值有明显变化时更新
+  if (Math.abs(newP - p.value) > 0.001) {
+    p.value = newP;
+
+    // 直接更新CSS变量，避免requestAnimationFrame
+    body.style.setProperty("--p", p.value.toString());
+
+    updateCornerSection();
+  }
+};
+
+// 优化的滚动事件处理 - 使用类似main.js的简单节流
+let lastUpdateTime = 0;
+const handleScroll = () => {
+  const now = Date.now();
+  if (now - lastUpdateTime < 16) return; // 限制为60FPS
+  lastUpdateTime = now;
+  updateProgress();
+};
 
 // 方法
 const setP = (value: number) => {
@@ -525,100 +465,16 @@ const closeModal = () => {
   modalImage.value = null;
 };
 
-const updateCornerSection = () => {
-  const corner = currentCorner.value;
-  if (corner) {
-    showCorner.value = true;
-    cornerStart.value = corner.st;
-    cornerEnd.value = corner.ed;
-  } else {
-    showCorner.value = false;
-  }
-
-  // 查找当前位置对应的路段
-  const currentSection = sections.find(
-    (section) => section.st <= p.value && p.value <= section.ed
-  );
-
-  if (currentSection) {
-    showSection.value = true;
-    sectionStart.value = currentSection.st;
-    sectionEnd.value = currentSection.ed;
-  } else {
-    showSection.value = false;
-  }
-};
-
-// 节流函数
-const throttle = (func: () => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  let lastExecTime = 0;
-  return function () {
-    const currentTime = Date.now();
-
-    if (currentTime - lastExecTime > delay) {
-      func();
-      lastExecTime = currentTime;
-    } else {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(
-        () => {
-          func();
-          lastExecTime = Date.now();
-        },
-        delay - (currentTime - lastExecTime)
-      );
-    }
-  };
-};
-
-const updateProgress = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercentage = scrollTop / docHeight;
-
-  scrollDistance.value = scrollTop;
-
-  // 控制scrolled类 - 与原项目保持一致
-  if (scrollTop > 2) {
-    document.body.classList.add("scrolled");
-  } else {
-    document.body.classList.remove("scrolled");
-  }
-
-  // 根据滚动位置更新进度 - 让整个滚动距离都用来展示赛道进度
-  // 移除死区，让整个滚动范围都响应，但保留一个小的缓冲区
-  const newP = Math.max(0, Math.min(1, (scrollPercentage - 0.01) / 0.98));
-
-  // 只在值发生变化时更新
-  if (Math.abs(newP - p.value) > 0.001) {
-    p.value = newP;
-
-    // 使用requestAnimationFrame优化CSS变量更新
-    requestAnimationFrame(() => {
-      document.documentElement.style.setProperty("--p", p.value.toString());
-    });
-
-    updateCornerSection();
-  }
-};
-
-// 使用节流优化滚动事件
-const handleScroll = throttle(updateProgress, 16); // 约60FPS
-
-const updatePageHeight = () => {
-  // 增加页面高度，让用户有更长的滚动距离来体验赛道
-  // 相当于20.832公里的赛道需要更多的滚动距离来慢慢体验
-  document.body.style.height = "9000vh";
-};
-
 // 生命周期
 onMounted(() => {
-  // 设置页面高度以支持滚动
-  updatePageHeight();
+  // 缓存DOM元素
+  body = document.body;
+
+  // 设置页面高度
+  body.style.height = "9000vh";
 
   // 初始化CSS变量
-  document.documentElement.style.setProperty("--p", "0");
+  body.style.setProperty("--p", "0");
 
   // 监听滚动事件，使用passive选项优化性能
   window.addEventListener("scroll", handleScroll, { passive: true });
@@ -629,33 +485,38 @@ onMounted(() => {
     lang.value = "cn";
   }
 
-  // 初始调用一次滚动处理
-  handleScroll();
-
-  // 立即检查是否需要添加scrolled类
-  const currentScrollTop =
-    window.pageYOffset || document.documentElement.scrollTop;
-  if (currentScrollTop > 2) {
-    document.body.classList.add("scrolled");
-  }
+  // 初始调用
+  updateProgress();
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
-  // 清理CSS变量
-  document.documentElement.style.removeProperty("--p");
-  // 重置页面高度
-  document.body.style.height = "auto";
-  // 清理scrolled类
-  document.body.classList.remove("scrolled");
+  // 清理
+  body.style.removeProperty("--p");
+  body.style.height = "auto";
+  body.classList.remove("scrolled");
 });
 </script>
 
 <style>
 @import url("./assets/main.css");
-.root {
-  scroll-behavior: smooth;
+
+/* 性能优化样式 */
+.track-map {
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0); /* 强制硬件加速 */
 }
+
+.corner-name {
+  contain: layout style;
+  transform: translateZ(0);
+}
+
+.progress {
+  will-change: stroke-dashoffset;
+}
+
 .controls {
   position: fixed;
   top: 20px;
@@ -691,35 +552,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* 性能优化 */
-.track-map {
-  contain: layout style paint;
-  will-change: transform;
-}
-
-.corner-name {
-  transform: translateZ(0); /* 强制硬件加速 */
-  contain: layout style;
-}
-
-.progress {
-  will-change: stroke-dashoffset;
-}
-
-/* 进度指示器 */
-.progress-indicator {
-  position: fixed;
-  top: 10px;
-  left: 20px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  z-index: 1000;
-  opacity: 0.8;
-}
-
 /* 原项目的简单进入/离开动画 */
 .corner .path {
   stroke: #ff4757;
@@ -731,5 +563,66 @@ html {
   stroke-width: 10px;
   stroke: var(--text1);
   stroke-linecap: butt;
+}
+
+/* 弯道详细信息样式 */
+.more-info {
+  margin-top: 1.5em;
+  padding: 1.5em;
+  border-radius: 12px;
+  color: #2c3e50;
+  line-height: 1.8;
+  font-size: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* 图片画廊样式 */
+.modern-gallery {
+  margin-top: 1.5em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+
+.modern-thumb {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: white;
+}
+
+.modern-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+}
+
+.thumb-info {
+  padding: 0.8em;
+  background: white;
+  border-radius: 0 0 8px 8px;
+}
+
+.modern-source {
+  color: #3498db;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.thumb-author {
+  color: #7f8c8d;
+  font-size: 13px;
 }
 </style>
