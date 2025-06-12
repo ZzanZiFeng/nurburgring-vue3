@@ -28,7 +28,7 @@
           <g class="extras">
             <path
               v-for="c in bridges"
-              :key="c.en"
+              :key="c.ch"
               class="bridge"
               :d="`M${w * c.stx} ${h * c.sty}L${w * c.edx} ${h * c.edy}`"
             />
@@ -51,9 +51,10 @@
           <use href="#track" class="progress" />
         </svg>
 
+        <!-- Corner Names -->
         <div
           v-for="c in corners"
-          :key="c.en"
+          :key="c.ch"
           class="corner-name"
           :class="[
             c.st < p || showAllCornerNames ? 'show' : 'hidden',
@@ -72,9 +73,10 @@
           </div>
         </div>
 
-        <div class="mid">
+        <!-- Mid Content -->
+        <div class="mid" v-cloak>
           <div class="msg" v-if="p == 0">
-            <div class="inner">
+            <div class="inner" v-cloak>
               <p class="title-font msg-title" v-if="lang == 'cn'">
                 纽北赛道地图
               </p>
@@ -86,7 +88,8 @@
                   href="https://zh.wikipedia.org/zh-hans/%E7%BA%BD%E5%8D%9A%E6%A0%BC%E6%9E%97%E8%B5%9B%E9%81%93"
                   target="_blank"
                   >纽博格林赛道</a
-                >（德语：Nürburgring）修筑于 1920
+                >
+                （德语：Nürburgring）修筑于 1920
                 年代，由于跑道非常长、地形复杂充满挑战性，被认为是世界上最严苛的竞速赛道，其中的北环俗称为"纽北"，又叫"绿色地狱"。这里很多弯道都有独特的名字和故事，通过本地图可以方便爱好者学习。
               </p>
               <p v-if="lang == 'en'">
@@ -121,508 +124,180 @@
       </div>
     </div>
 
-    <div class="desc skew-p">
-      <div class="logo">
-        <div class="inner skew-n">
-          <span class="title-font" v-if="lang == 'cn'"
-            >纽<span>博格林</span>北<span>环</span>赛道地图</span
-          >
-          <span class="title-font" v-if="lang == 'en'">Nürburgring Map</span>
-          <img src="/assets/logo.svg" alt="纽北赛道地图" />
-        </div>
-      </div>
-      <div class="corner-info">
-        <div class="inner" v-if="currentCorner && p > 0">
-          <div
-            class="primary skew-n title-font"
-            v-if="lang == 'cn' && currentCorner.ch"
-            :class="currentCorner.ch == currentCorner.nk ? 'qt' : ''"
-          >
-            {{ currentCorner.ch }}
-          </div>
-          <div class="primary skew-n" v-if="lang == 'en' && currentCorner.en">
-            {{ currentCorner.en }}
-          </div>
-          <div
-            class="nickname qt skew-n title-font"
-            v-if="
-              lang == 'cn' &&
-              currentCorner.nk &&
-              currentCorner.ch != currentCorner.nk
-            "
-          >
-            {{ currentCorner.nk }}
-          </div>
-          <div class="secondary skew-n" v-if="currentCorner.en">
-            <span class="extra" v-if="currentCorner.de">
-              <svg viewBox="0 0 5 3" class="skew-p">
-                <rect
-                  id="black_stripe"
-                  width="5"
-                  height="3"
-                  y="0"
-                  x="0"
-                  fill="#000"
-                />
-                <rect
-                  id="red_stripe"
-                  width="5"
-                  height="2"
-                  y="1"
-                  x="0"
-                  fill="#6C6C6C"
-                />
-                <rect
-                  id="gold_stripe"
-                  width="5"
-                  height="1"
-                  y="2"
-                  x="0"
-                  fill="#DADADA"
-                />
-              </svg>
-              {{ currentCorner.de }}
-            </span>
-            <span class="extra" v-if="lang == 'cn' && currentCorner.en">
-              <svg viewBox="0 0 60 30" class="skew-p">
-                <clipPath id="s">
-                  <path d="M0,0 v30 h60 v-30 z" />
-                </clipPath>
-                <clipPath id="t">
-                  <path
-                    d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"
-                  />
-                </clipPath>
-                <g clip-path="url(#s)">
-                  <path d="M0,0 v30 h60 v-30 z" fill="#292929" />
-                  <path
-                    d="M0,0 L60,30 M60,0 L0,30"
-                    stroke="#fff"
-                    stroke-width="6"
-                  />
-                  <path
-                    d="M0,0 L60,30 M60,0 L0,30"
-                    clip-path="url(#t)"
-                    stroke="#646464"
-                    stroke-width="4"
-                  />
-                  <path
-                    d="M30,0 v30 M0,15 h60"
-                    stroke="#fff"
-                    stroke-width="10"
-                  />
-                  <path
-                    d="M30,0 v30 M0,15 h60"
-                    stroke="#646464"
-                    stroke-width="6"
-                  />
-                </g>
-              </svg>
-              {{ currentCorner.en }}
-            </span>
-          </div>
-          <!-- 弯道详细信息 -->
-          <div
-            class="more more-info skew-n"
-            v-if="currentCorner && currentCorner.more && lang == 'cn'"
-            v-html="currentCorner.more"
-          ></div>
-        </div>
-      </div>
+    <!-- Description Panel -->
+    <DescriptionPanel
+      :lang="lang"
+      :current-corner="currentCorner"
+      :p="p"
+      :show-all-corner-names="showAllCornerNames"
+      :dark-mode="darkMode"
+      @toggle-all-corners="showAllCornerNames = !showAllCornerNames"
+      @toggle-dark-mode="toggleDarkMode"
+      @toggle-lang="toggleLang"
+      @open-modal="openModal"
+      @set-p="setP"
+    />
 
-      <!-- 图片展示 -->
-      <div
-        class="thumbs modern-gallery"
-        v-if="currentCorner && currentCorner.imgs"
-      >
-        <div
-          class="thumb modern-thumb"
-          v-for="img in currentCorner.imgs"
-          :key="img.src"
-          :class="img.url ? 'has-author' : ''"
-          @mouseover="
-            ($event.currentTarget as HTMLElement).style.transform =
-              'scale(1.02)'
-          "
-          @mouseleave="
-            ($event.currentTarget as HTMLElement).style.transform = 'scale(1)'
-          "
-        >
-          <img
-            class="skew-n modern-img"
-            :src="`https://s.anyway.red/nurburgring/${img.src}!/fh/300/quality/68/progressive/true/ignore-error/true`"
-            loading="lazy"
-            @click="openModal(img)"
-            alt="Corner image"
-          />
-          <div class="thumb-info">
-            <a
-              class="thumb-source modern-source"
-              v-if="img.url"
-              :href="img.url"
-              target="_blank"
-              :title="`查看照片来源: ${img.author}`"
-              @mouseover="
-                ($event.target as HTMLElement).style.color = '#2980b9'
-              "
-              @mouseleave="
-                ($event.target as HTMLElement).style.color = '#3498db'
-              "
-            >
-              <span class="skew-n">📸 {{ img.author }}</span>
-            </a>
-            <div v-else class="thumb-author">📸 {{ img.author }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 控制按钮 -->
-    <div class="controls">
-      <button @click="toggleLang" class="control-btn">
-        {{ lang === "cn" ? "EN" : "中文" }}
-      </button>
-      <button @click="toggleAllCornerNames" class="control-btn">
-        {{ showAllCornerNames ? "隐藏所有" : "显示所有" }}
-      </button>
-    </div>
-
-    <!-- 图片模态框 -->
-    <div
-      class="modal image"
-      :class="showModal ? 'show' : ''"
-      @click="closeModal"
-      v-if="modalImage"
-    >
-      <div class="inner" @click.stop>
-        <div class="modal-content skew-n">
-          <img :src="modalImage.src" :alt="modalImage.author" />
-          <div class="source-in-modal" v-if="modalImage.url">
-            <a :href="modalImage.url" target="_blank">{{
-              modalImage.author
-            }}</a>
-          </div>
-        </div>
-        <div class="modal-close skew-n" @click="closeModal">
-          <svg viewBox="0 0 30 30">
-            <circle cx="15" cy="15" r="12" />
-            <path d="M10 10L20 20M20 10L10 20" />
-          </svg>
-        </div>
-      </div>
-    </div>
+    <!-- Modal -->
+    <AppModal
+      :show="showModal"
+      :type="modalType"
+      :content="modalContent"
+      @close="showModal = false"
+    />
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import { useTrackData } from "./composables/useTrackData";
+import DescriptionPanel from "./components/DescriptionPanel.vue";
+import AppModal from "./components/AppModal.vue";
+import { cornerData, bridgeData, sectionData } from "./data/cornerData.js";
 
-// 基础响应式数据 - 只保留必要的
-const lang = ref("cn");
-const showAllCornerNames = ref(false);
-const showModal = ref(false);
-const modalImage = ref<{ src: string; url: string; author: string } | null>(
-  null
-);
-
-// 用于模板绑定的响应式数据 - 但我们会直接操作内部值
+// Reactive state
 const p = ref(0);
+const w = ref(660);
+const h = ref(530);
+const lang = ref(detectLanguage());
+const showModal = ref(false);
+const showAllCornerNames = ref(false);
+const darkMode = ref(
+  window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+);
 const showCorner = ref(false);
 const showSection = ref(false);
+const currentCorner = ref(null);
 const cornerStart = ref(0);
 const cornerEnd = ref(0);
 const sectionStart = ref(0);
 const sectionEnd = ref(0);
-const currentCorner = ref<(typeof corners)[0] | null>(null);
+const modalContent = ref("");
+const modalType = ref("text");
 
-// 常量数据
-const w = 660;
-const h = 530;
+// Data
+const corners = cornerData;
+const bridges = bridgeData;
+const sections = sectionData;
 
-// 获取赛道数据
-const { bridges, sections, corners } = useTrackData();
+// Methods
+function detectLanguage() {
+  const acceptLanguage = navigator.language || navigator.userLanguage;
+  if (acceptLanguage.includes("zh")) {
+    return "cn";
+  }
+  return "en";
+}
 
-// 缓存DOM元素
-let body: HTMLElement;
+function toggleLang() {
+  lang.value = lang.value === "en" ? "cn" : "en";
+}
 
-// 直接查找当前弯道 - 避免computed的开销
-const findCurrentCorner = (progress: number) => {
-  if (progress === 0) return null;
+function toggleDarkMode() {
+  darkMode.value = !darkMode.value;
+  const root = document.querySelector(":root");
+  if (darkMode.value) {
+    root.classList.add("dark");
+  } else {
+    root.classList.remove("dark");
+  }
+}
 
-  // 查找当前位置对应的弯道
-  for (const corner of corners) {
-    if (corner.st <= progress && progress <= corner.ed) {
-      return corner;
+function setP(percentage) {
+  p.value = percentage;
+  const body = document.querySelector("body");
+  window.scrollTo(0, (body.scrollHeight - window.innerHeight) * percentage);
+  updateScrollDistance();
+}
+
+function openModal(type, img = null) {
+  modalType.value = type;
+  if (type === "text") {
+    modalContent.value =
+      "网页设计 & 开发：<a href='https://jjying.com/' target='_blank'>JJ Ying</a><br/><br/><strong>参考信息:</strong><br/>· <a target='_blank' href='https://oversteer48.com/nurburgring-corner-names/'>Corner Names, Numbers and circuit map</a><br/>· <a target='_blank' href='https://nring.info/nurburgring-nordschleife-corners/'>NRing.info</a><br/>· <a target='_blank' href='https://www.youtube.com/watch?v=-lCR1_cDqTg'>Nürburgring Corner Names Explained</a><br/>· 键盘车神教教主视频：<a target='_blank' href='https://www.bilibili.com/video/BV1NntCe4ETM/'>纽北每一个弯的名字？</a><br/><br/><strong>页面源码:</strong><br/>· <a target='_blank' href='https://github.com/JJYing/Nurburgring-Map'>@GitHub</a>";
+  }
+  if (type === "image") {
+    modalContent.value = `<img src='https://s.anyway.red/nurburgring/${img.src}!/quality/80/progressive/true/ignore-error/true'/>`;
+    if (img.url) {
+      modalContent.value += `<div class='source-in-modal'>@<a href='${img.url}' target='_blank'>${img.author}</a></div>`;
     }
   }
-
-  // 查找最近经过的弯道
-  const passedCorners = corners.filter((corner) => corner.ed < progress);
-  return passedCorners[passedCorners.length - 1] || null;
-};
-
-// 直接更新弯道和路段状态
-const updateCornerSection = () => {
-  const corner = findCurrentCorner(p.value);
-
-  if (corner) {
-    showCorner.value = true;
-    cornerStart.value = corner.st;
-    cornerEnd.value = corner.ed;
-    currentCorner.value = corner;
-  } else {
-    showCorner.value = false;
-    currentCorner.value = null;
-  }
-
-  // 查找当前位置对应的路段
-  const currentSection = sections.find(
-    (section) => section.st <= p.value && section.ed <= p.value
-  );
-
-  if (currentSection) {
-    showSection.value = true;
-    sectionStart.value = currentSection.st;
-    sectionEnd.value = currentSection.ed;
-  } else {
-    showSection.value = false;
-  }
-};
-
-// 优化的进度更新函数 - 直接操作DOM，减少Vue响应式开销
-const updateProgress = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercentage = scrollTop / docHeight;
-
-  // 控制scrolled类
-  if (scrollTop > 2) {
-    body.classList.add("scrolled");
-  } else {
-    body.classList.remove("scrolled");
-  }
-
-  // 计算新的进度值
-  const newP = Math.max(0, Math.min(1, (scrollPercentage - 0.01) / 0.98));
-
-  // 只在值有明显变化时更新
-  if (Math.abs(newP - p.value) > 0.001) {
-    p.value = newP;
-
-    // 直接更新CSS变量，避免requestAnimationFrame
-    body.style.setProperty("--p", p.value.toString());
-
-    updateCornerSection();
-  }
-};
-
-// 优化的滚动事件处理 - 使用类似main.js的简单节流
-let lastUpdateTime = 0;
-const handleScroll = () => {
-  const now = Date.now();
-  if (now - lastUpdateTime < 16) return; // 限制为60FPS
-  lastUpdateTime = now;
-  updateProgress();
-};
-
-// 方法
-const setP = (value: number) => {
-  p.value = value;
-  updateCornerSection();
-
-  // 计算对应的滚动位置并滚动到那里
-  const targetScrollPercentage = value * 0.98 + 0.01;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const targetScrollTop = targetScrollPercentage * docHeight;
-
-  // 平滑滚动到目标位置
-  window.scrollTo({
-    top: targetScrollTop,
-    behavior: "smooth",
-  });
-};
-
-const toggleLang = () => {
-  lang.value = lang.value === "cn" ? "en" : "cn";
-};
-
-const toggleAllCornerNames = () => {
-  showAllCornerNames.value = !showAllCornerNames.value;
-};
-
-const openModal = (img: { src: string; url?: string; author?: string }) => {
-  modalImage.value = {
-    src: `https://s.anyway.red/nurburgring/${img.src}!/fh/300/quality/68/progressive/true/ignore-error/true`,
-    url: img.url || "",
-    author: img.author || "",
-  };
   showModal.value = true;
-};
+}
 
-const closeModal = () => {
-  showModal.value = false;
-  modalImage.value = null;
-};
+function updateScrollDistance() {
+  showCorner.value = false;
+  showSection.value = false;
+  currentCorner.value = null;
 
-// 生命周期
-onMounted(() => {
-  // 缓存DOM元素
-  body = document.body;
-
-  // 设置页面高度
-  body.style.height = "9000vh";
-
-  // 初始化CSS变量
-  body.style.setProperty("--p", "0");
-
-  // 监听滚动事件，使用passive选项优化性能
-  window.addEventListener("scroll", handleScroll, { passive: true });
-
-  // 检测用户的语言偏好
-  const userLang = navigator.language || "en";
-  if (userLang.startsWith("zh")) {
-    lang.value = "cn";
+  const body = document.querySelector("body");
+  let progress = window.scrollY / (body.scrollHeight - window.innerHeight);
+  if (progress > 1) {
+    progress = 1;
   }
 
-  // 初始调用
-  updateProgress();
+  body.style.setProperty("--p", progress);
+  p.value = progress;
+
+  corners.forEach((corner) => {
+    if (progress > corner.st && progress < corner.ed) {
+      showCorner.value = true;
+      cornerStart.value = corner.st;
+      cornerEnd.value = corner.ed;
+      currentCorner.value = corner;
+    }
+  });
+
+  sections.forEach((section) => {
+    if (progress > section.st && progress < section.ed) {
+      showSection.value = true;
+      sectionStart.value = section.st;
+      sectionEnd.value = section.ed;
+    }
+  });
+}
+
+function handleScroll() {
+  if (window.scrollY > 2) {
+    document.body.classList.add("scrolled");
+  } else {
+    document.body.classList.remove("scrolled");
+  }
+  updateScrollDistance();
+}
+
+function updatePageHeight() {
+  const body = document.querySelector("body");
+  if (window.innerHeight < window.innerWidth) {
+    body.classList.remove("vertical");
+    body.classList.add("horizontal");
+  } else {
+    body.classList.remove("horizontal");
+    body.classList.add("vertical");
+  }
+}
+
+// Lifecycle
+onMounted(() => {
+  const root = document.querySelector(":root");
+  if (darkMode.value) {
+    root.classList.add("dark");
+  }
+
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("resize", () => {
+    updateScrollDistance();
+    updatePageHeight();
+  });
+
+  updateScrollDistance();
+  updatePageHeight();
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
-  // 清理
-  body.style.removeProperty("--p");
-  body.style.height = "auto";
-  body.classList.remove("scrolled");
+  window.removeEventListener("resize", () => {
+    updateScrollDistance();
+    updatePageHeight();
+  });
 });
 </script>
-
-<style>
-@import url("./assets/main.css");
-
-/* 性能优化样式 */
-.track-map {
-  contain: layout style paint;
-  will-change: transform;
-  transform: translateZ(0); /* 强制硬件加速 */
-}
-
-.corner-name {
-  contain: layout style;
-  transform: translateZ(0);
-}
-
-.progress {
-  will-change: stroke-dashoffset;
-}
-
-.controls {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  gap: 10px;
-  z-index: 1000;
-}
-
-.control-btn {
-  padding: 8px 16px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.control-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-  transform: translateY(-2px);
-}
-
-/* 隐藏原有的样式元素 */
-[v-cloak] {
-  display: none;
-}
-
-/* 优化滚动体验 */
-html {
-  scroll-behavior: smooth;
-}
-
-/* 原项目的简单进入/离开动画 */
-.corner .path {
-  stroke: #ff4757;
-  stroke-width: 8px;
-  stroke-linecap: butt;
-}
-
-.section .path {
-  stroke-width: 10px;
-  stroke: var(--text1);
-  stroke-linecap: butt;
-}
-
-/* 弯道详细信息样式 */
-.more-info {
-  margin-top: 1.5em;
-  padding: 1.5em;
-  border-radius: 12px;
-  color: #2c3e50;
-  line-height: 1.8;
-  font-size: 15px;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-/* 图片画廊样式 */
-.modern-gallery {
-  margin-top: 1.5em;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1em;
-  padding: 1em;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
-}
-
-.modern-thumb {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  background: white;
-}
-
-.modern-img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px 8px 0 0;
-  transition: all 0.3s ease;
-}
-
-.thumb-info {
-  padding: 0.8em;
-  background: white;
-  border-radius: 0 0 8px 8px;
-}
-
-.modern-source {
-  color: #3498db;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.thumb-author {
-  color: #7f8c8d;
-  font-size: 13px;
-}
-</style>
